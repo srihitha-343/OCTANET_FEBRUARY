@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: "Arial", sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRKrnqajSNpf0cjbYVVeWlhE0_GVEJ122vXw&usqp=CAU'); /* Replace 'your_background_image.jpg' with the path to your background image */
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .container {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+        }
+        h1 {
+            text-align: center;
+            color: #4CAF50; /* Green */
+        }
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 10px;
+            background-color: #f2f2f2; /* Light Gray */
+            outline: none;
+        }
+        input[type="text"]::placeholder {
+            color: #999; /* Light Gray */
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        li {
+            padding: 15px;
+            background-color: #f2f2f2; /* Light Gray */
+            border-radius: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        li span.delete {
+            color: #ff4d4d; /* Red */
+            cursor: pointer;
+            font-size: 20px;
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            display: none;
+        }
+        li:hover span.delete {
+            display: block;
+        }
+        li.completed {
+            background-color: #e6ffe6; /* Light Green */
+            text-decoration: line-through;
+            color: #666; /* Gray */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>To-Do List</h1>
+        <input type="text" id="taskInput" placeholder="Add New Task">
+        <ul id="taskList"></ul>
+    </div>
+
+    <script>
+        const taskInput = document.getElementById('taskInput');
+        const taskList = document.getElementById('taskList');
+
+        // Function to add a new task
+        function addTask() {
+            if (taskInput.value.trim() !== '') {
+                const li = document.createElement('li');
+                li.textContent = taskInput.value;
+                li.innerHTML += '<span class="delete" onclick="deleteTask(this)">-</span>';
+                taskList.appendChild(li);
+                taskInput.value = '';
+            }
+        }
+
+        // Function to delete a task
+        function deleteTask(element) {
+            element.parentElement.remove();
+        }
+
+        // Event listener for adding a new task
+        taskInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                addTask();
+            }
+        });
+    </script>
+</body>
+</html>
